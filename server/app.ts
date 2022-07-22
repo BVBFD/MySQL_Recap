@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction, query } from 'express';
 import mysql from 'mysql';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -74,21 +74,45 @@ app.get(
 );
 
 app.put('/update', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-  } catch (error) {
-    console.error(error);
-  }
+  const id = req.body.id;
+  const wage = req.body.wage;
+
+  db.query(
+    'UPDATE employees SET wage=? WHERE id=?',
+    [wage, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(201).json(result);
+      }
+    }
+  );
 });
 
 app.delete(
   '/delete/:id',
   async (req: Request, res: Response, next: NextFunction) => {
-    try {
-    } catch (error) {
-      console.error(error);
-    }
+    const id = req.params.id;
+    db.query('DELETE FROM employees WHERE id=?', [id], (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(204).json('Delete it successfully');
+      }
+    });
   }
 );
+
+app.get('/initid', async (req: Request, res: Response, next: NextFunction) => {
+  db.query('ALTER TABLE employees AUTO_INCREMENT = 1', [], (err, result) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json('initialize the auto Increment!');
+    }
+  });
+});
 
 app.listen(8080, () => {
   console.log('MySQL have been started!');
