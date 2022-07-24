@@ -58,12 +58,12 @@ export const updateTask = async (
   res: Response,
   next: NextFunction
 ) => {
-  const taskId = req.body.taskId;
+  const userId = req.body.userId;
   const body = req.body;
 
   db.query(
-    'UPDATE tasks SET ? WHERE taskId=?',
-    [body, taskId],
+    'UPDATE tasks SET ? WHERE userId=?',
+    [body, userId],
     (err, result) => {
       if (err) {
         res.status(500).json(err);

@@ -5,12 +5,12 @@ import axiosRepuest from './config';
 import { genRandomId } from './randomId';
 
 type EmployeeType = {
-  id?: number;
-  name: string;
-  age: number;
-  country: string;
-  position: string;
-  wage: number;
+  id?: string;
+  name?: string;
+  age?: number;
+  country?: string;
+  position?: string;
+  wage?: number;
   taskName?: string;
   hour?: number;
 };
