@@ -6,13 +6,14 @@ export const createTask = async (
   res: Response,
   next: NextFunction
 ) => {
+  const taskId = req.body.taskId;
   const taskName = req.body.taskName;
   const hour = req.body.hour;
   const userId = req.body.userId;
 
   db.query(
-    'INSERT INTO tasks (taskName, hour, userId) VALUES (?,?,?)',
-    [taskName, hour, userId],
+    'INSERT INTO tasks (taskId, taskName, hour, userId) VALUES (?,?,?,?)',
+    [taskId, taskName, hour, userId],
     (err, result) => {
       if (err) {
         res.status(500).json(err);

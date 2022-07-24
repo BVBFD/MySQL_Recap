@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosRepuest from './config';
+import { genRandomId } from './randomId';
 
 type EmployeeType = {
   id?: number;
@@ -20,10 +21,25 @@ function App() {
   const [country, setCountry] = useState<string>('');
   const [position, setPosition] = useState<string>('');
   const [wage, setWage] = useState<number>(0);
+  const navigate = useNavigate();
 
-  const [newWage, setNewWage] = useState<number>(0);
+  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      await axiosRepuest.post('/employees/create', {
+        id: genRandomId(),
+        name,
+        age,
+        country,
+        position,
+        wage,
+      });
 
-  const [employeeList, setEmployeeList] = useState<EmployeeType[]>([]);
+      navigate(`/list`);
+    } catch (error) {
+      window.alert(error);
+    }
+  };
 
   return (
     <div className='App'>
@@ -44,7 +60,13 @@ function App() {
           type='number'
           onChange={(e) => setWage(e.target.value as unknown as number)}
         />
-        <button>Add Employee</button>
+        <button
+          onClick={
+            name && age && country && position && wage ? handleSubmit : () => {}
+          }
+        >
+          Add Employee
+        </button>
         <Link to={'/list'}>
           <button>Show Employees</button>
         </Link>

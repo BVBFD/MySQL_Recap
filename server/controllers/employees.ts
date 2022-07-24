@@ -6,6 +6,7 @@ export const createEmployee = async (
   res: Response,
   next: NextFunction
 ) => {
+  const id = req.body.id;
   const name = req.body.name;
   const age = req.body.age;
   const country = req.body.country;
@@ -13,8 +14,8 @@ export const createEmployee = async (
   const wage = req.body.wage;
 
   db.query(
-    'INSERT INTO employees (name, age, country, position, wage) VALUES (?,?,?,?,?)',
-    [name, age, country, position, wage],
+    'INSERT INTO employees (id, name, age, country, position, wage) VALUES (?,?,?,?,?,?)',
+    [id, name, age, country, position, wage],
     (err, result) => {
       if (err) {
         res.status(500).json(err);

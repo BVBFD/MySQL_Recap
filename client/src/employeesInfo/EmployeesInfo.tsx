@@ -21,7 +21,7 @@ const EmployeesInfo = () => {
     <div className='employeesInfo'>
       <div className='wrapper'>
         <p>
-          <span>id</span> <input type='number' defaultValue={infoData?.id} />
+          <span>id</span> <input type='text' defaultValue={infoData?.id} />
         </p>
         <p>
           <span>name</span> <input type='text' defaultValue={infoData?.name} />
