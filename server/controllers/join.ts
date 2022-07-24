@@ -35,6 +35,26 @@ export const leftJoin = async (
   );
 };
 
+export const eachUserLeftJoin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userId = req.params.id;
+
+  db.query(
+    'SELECT * FROM employees AS e LEFT JOIN tasks AS t ON e.id=t.userId WHERE t.userId=?',
+    [userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+};
+
 export const exclusiveLeftJoin = async (
   req: Request,
   res: Response,

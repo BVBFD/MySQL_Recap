@@ -1,0 +1,22 @@
+.list {
+  height: 100vh;
+}
+
+.list .edit {
+  color: darkblue;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.list .edit:active {
+  transform: scale(0.9);
+}
+
+.list .delete {
+  color: darkred;
+  cursor: pointer;
+}
+
+.list .delete:active {
+  transform: scale(0.9);
+}

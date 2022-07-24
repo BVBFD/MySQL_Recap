@@ -64,19 +64,15 @@ export const updateEmployee = async (
   next: NextFunction
 ) => {
   const id = req.body.id;
-  const wage = req.body.wage;
+  const body = req.body;
 
-  db.query(
-    'UPDATE employees SET wage=? WHERE id=?',
-    [wage, id],
-    (err, result) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(201).json(result);
-      }
+  db.query('UPDATE employees SET ? WHERE id=?', [body, id], (err, result) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(201).json(result);
     }
-  );
+  });
 };
 
 export const deleteEmployee = async (

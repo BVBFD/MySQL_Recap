@@ -2,51 +2,52 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: aliceblue;
 }
 
-.information {
+.App .information {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 30%;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(60deg, darkblue, #838383, darkred);
+  padding: 2rem 3rem 2rem 3rem;
+  color: whitesmoke;
 }
 
-input {
-  width: 300px;
+.App label {
+  margin-bottom: 0.4rem;
+  font-size: x-large;
+}
+
+.App input {
+  width: 400px;
   height: 50px;
   font-size: 20px;
   padding-left: 10px;
   margin: 5px;
+  margin-bottom: 2rem;
 }
 
-button {
+.App button {
   width: 320px;
   height: 50px;
   margin-top: 15px;
-}
-
-button:hover {
   cursor: pointer;
+  background: salmon;
+  font-size: 1.3rem;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
 }
 
-.employees {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
+.App button:hover {
+  background: darkorange;
 }
 
-.employee {
-  width: 700px;
-  height: auto;
-  border: 1px solid black;
-  margin: 10px;
-  display: flex;
-  padding: 10px;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.employee h3 {
-  margin: 20px;
+.App button:active {
+  transform: scale(0.95);
 }

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  eachUserLeftJoin,
   exclusiveLeftJoin,
   groupbyHaving,
   innerJoin,
@@ -11,6 +12,8 @@ const router = Router();
 router.get('/innerjoin', innerJoin);
 
 router.get('/leftjoin', leftJoin);
+
+router.get('/leftjoin/:id', eachUserLeftJoin);
 
 router.get('/groupbyhaving', groupbyHaving);
 

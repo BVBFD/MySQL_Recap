@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Link } from 'react-router-dom';
 
-type Employee = {
+type EmployeeType = {
+  id?: number;
   name: string;
   age: number;
   country: string;
   position: string;
   wage: number;
+  taskName?: string;
+  hour?: number;
 };
 
 function App() {
@@ -19,7 +23,7 @@ function App() {
 
   const [newWage, setNewWage] = useState<number>(0);
 
-  const [employeeList, setEmployeeList] = useState<Employee[]>([]);
+  const [employeeList, setEmployeeList] = useState<EmployeeType[]>([]);
 
   return (
     <div className='App'>
@@ -41,32 +45,13 @@ function App() {
           onChange={(e) => setWage(e.target.value as unknown as number)}
         />
         <button>Add Employee</button>
-      </div>
-      <div className='employees'>
-        <button>Show Employees</button>
-
-        {employeeList.map((val, key) => {
-          return (
-            <div className='employee'>
-              <div>
-                <h3>Name: {val.name}</h3>
-                <h3>Age: {val.age}</h3>
-                <h3>Country: {val.country}</h3>
-                <h3>Position: {val.position}</h3>
-                <h3>Wage: {val.wage}</h3>
-              </div>
-              <div>
-                <input type='text' placeholder='2000...' />
-                <button>Update</button>
-
-                <button>Delete</button>
-              </div>
-            </div>
-          );
-        })}
+        <Link to={'/list'}>
+          <button>Show Employees</button>
+        </Link>
       </div>
     </div>
   );
 }
 
+export type { EmployeeType };
 export default App;
