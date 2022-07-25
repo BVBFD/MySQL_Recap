@@ -11,8 +11,10 @@ type EmployeeType = {
   country?: string;
   position?: string;
   wage?: number;
+  taskId?: string;
   taskName?: string;
   hour?: number;
+  userId?: string;
 };
 
 function App() {

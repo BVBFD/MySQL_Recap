@@ -1,7 +1,9 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EmployeeType } from '../App';
+import { checkNullTaskData } from '../checkNullTaskData';
 import axiosRepuest from '../config';
+import { genRandomId } from '../randomId';
 import './EmployeesInfo.css';
 
 type EmployTableType = {
@@ -29,8 +31,9 @@ const EmployeesInfo = () => {
 
   useEffect(() => {
     const getInfoData = async () => {
-      const res = await axiosRepuest.get(`/join/leftjoin/${id}`);
-      setInfoData(res.data[0]);
+      const res = await axiosRepuest.get(`/join/leftjoin`);
+      const user = res.data.filter((data: EmployeeType) => data.id === id);
+      setInfoData(user[0]);
     };
 
     getInfoData();
@@ -40,12 +43,24 @@ const EmployeesInfo = () => {
     e.preventDefault();
 
     try {
-      newEmployInfoData !== undefined &&
-        (await axiosRepuest.put('/employees/update', newEmployInfoData));
-      newTaskInfoData !== undefined &&
-        (await axiosRepuest.put('/tasks/update', newTaskInfoData));
-      window.alert('update success!!');
-      navigate('/list');
+      if (!checkNullTaskData(infoData)) {
+        newEmployInfoData !== undefined &&
+          (await axiosRepuest.put('/employees/update', newEmployInfoData));
+        newTaskInfoData !== undefined &&
+          (await axiosRepuest.post('/tasks/create', {
+            ...newTaskInfoData,
+            taskId: genRandomId(),
+          }));
+        window.alert('update success!!');
+        navigate('/list');
+      } else {
+        newEmployInfoData !== undefined &&
+          (await axiosRepuest.put('/employees/update', newEmployInfoData));
+        newTaskInfoData !== undefined &&
+          (await axiosRepuest.put('/tasks/update', newTaskInfoData));
+        window.alert('update success!!');
+        navigate('/list');
+      }
     } catch (error) {
       window.alert(error);
     }

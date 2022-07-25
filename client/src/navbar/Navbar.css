@@ -1,0 +1,28 @@
+.navbar {
+  width: 100%;
+  background-color: beige;
+  color: white;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar span {
+  width: fit-content;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: lightcoral;
+  height: 3rem;
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.navbar span:active {
+  transform: scale(0.95);
+  background-color: darkorange;
+  color: whitesmoke;
+}

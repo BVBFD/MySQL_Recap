@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import './List.css';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from '@mui/x-data-grid';
 import { EmployeeType } from '../App';
 import axiosRepuest from '../config';
 import { DeleteOutline, EditOutlined } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { checkNullTaskData } from '../checkNullTaskData';
 
 const List = () => {
   const [data, setData] = useState<EmployeeType[]>([]);
-  const [employeesEditObj, setEmployeesEditObj] = useState({});
-  const [tasksEditObj, setTasksEditObj] = useState({});
 
   useEffect(() => {
     const getEmployeesData = async () => {
@@ -88,20 +92,35 @@ const List = () => {
         return (
           <div>
             <Link to={`/employees/${params.row.id}`}>
-              <EditOutlined className='edit' onClick={handleEdit} />
+              <EditOutlined className='edit' />
             </Link>
-            <DeleteOutline className='delete' onClick={handleDelete} />
+            <DeleteOutline
+              className='delete'
+              onClick={() => handleDelete(params)}
+            />
           </div>
         );
       },
     },
   ];
 
-  const handleEdit = () => {
-    console.log(data);
-  };
-  const handleDelete = () => {
-    console.log(data);
+  const handleDelete = async (params: GridRenderCellParams<any, any, any>) => {
+    if (!checkNullTaskData(params.row)) {
+      try {
+        await axiosRepuest.delete(`/employees/delete/${params.row.id}`);
+        setData(data.filter((d) => d.id !== params.row.id));
+      } catch (error) {
+        window.alert(error);
+      }
+    } else {
+      try {
+        (await axiosRepuest.delete(`/tasks/delete/${params.row.taskId}`)) &&
+          (await axiosRepuest.delete(`/employees/delete/${params.row.id}`));
+        setData(data.filter((d) => d.id !== params.row.id));
+      } catch (error) {
+        window.alert(error);
+      }
+    }
   };
 
   return (
