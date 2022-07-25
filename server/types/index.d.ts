@@ -3,10 +3,11 @@ import express from 'express';
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      USER: string;
-      HOST: string;
-      PWD: string;
-      DB: string;
+      PORT: any;
+      USER: any;
+      HOST: any;
+      PWD: any;
+      DB: any;
     }
   }
 
