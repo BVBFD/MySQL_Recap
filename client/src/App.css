@@ -3,29 +3,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: aliceblue;
 }
 
 .App .information {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 85vw;
+  height: calc(100vh - 1rem);
   justify-content: center;
   align-items: center;
   background: linear-gradient(60deg, darkblue, #838383, darkred);
   padding: 2rem 3rem 2rem 3rem;
   color: whitesmoke;
+  margin-top: 2rem;
 }
 
 .App label {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
   font-size: x-large;
 }
 
 .App input {
   width: 70%;
-  height: 50px;
+  height: 40px;
   font-size: 20px;
   padding-left: 10px;
   margin: 5px;
@@ -55,7 +56,7 @@
 @media screen and (max-width: 1300px) {
   .App .information {
     width: calc(100% - 1rem);
-    height: calc(100vh - 2rem);
+    height: 100%;
   }
 
   .App button {
@@ -66,10 +67,6 @@
 @media screen and (max-width: 1024px) and (max-height: 600px) {
   .App .information {
     width: calc(100% - 4rem);
-    height: calc(100vh);
-    position: relative;
-    top: 1rem;
-    padding-top: 1rem;
   }
 
   .App input {
