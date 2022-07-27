@@ -9,7 +9,7 @@ import {
 import { EmployeeType } from '../App';
 import axiosRepuest from '../config';
 import { DeleteOutline, EditOutlined } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { checkNullTaskData } from '../checkNullTaskData';
 
 const List = () => {
@@ -24,71 +24,106 @@ const List = () => {
     getEmployeesData();
   }, []);
 
+  const bodyWidth = document.querySelector('body')?.clientWidth;
+
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'ID',
-      flex: 1,
+      headerClassName: 'tableId',
+      cellClassName: 'tableId',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'name',
       headerName: 'NAME',
-      flex: 1,
+      headerClassName: 'tableName',
+      cellClassName: 'tableName',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'age',
       headerName: 'AGE',
-      flex: 1,
+      headerClassName: 'tableAge',
+      cellClassName: 'tableAge',
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'country',
       headerName: 'COUNTRY',
-      flex: 1,
+      headerClassName: 'tableCountry',
+      cellClassName: 'tableCountry',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'position',
       headerName: 'POSITION',
-      flex: 1,
+      headerClassName: 'tablePosition',
+      cellClassName: 'tablePosition',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'wage',
       headerName: 'WAGE',
-      flex: 1,
+      headerClassName: 'tableWage',
+      cellClassName: 'tableWage',
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'taskName',
       headerName: 'TASK',
-      flex: 1,
+      headerClassName: 'tableTask',
+      cellClassName: 'tableTask',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'hour',
       headerName: 'HOUR',
-      flex: 1,
+      headerClassName: 'tableHour',
+      cellClassName: 'tableHour',
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: '',
       headerName: 'EDIT',
-      flex: 1,
+      headerClassName: 'tableEdit',
+      cellClassName: 'tableEdit',
+      width:
+        (bodyWidth as number) <= 600
+          ? (bodyWidth as number) / 2
+          : (bodyWidth as number) / 8,
       headerAlign: 'center',
       align: 'center',
 
-      renderCell: (params) => {
+      renderCell: (params: GridRenderCellParams<any, any, any>) => {
         return (
           <div>
             <Link to={`/employees/${params.row.id}`}>

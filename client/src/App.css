@@ -24,7 +24,7 @@
 }
 
 .App input {
-  width: 400px;
+  width: 70%;
   height: 50px;
   font-size: 20px;
   padding-left: 10px;
@@ -34,7 +34,7 @@
 
 .App button {
   width: 320px;
-  height: 50px;
+  padding: 0.4rem 0;
   margin-top: 15px;
   cursor: pointer;
   background: salmon;
@@ -50,4 +50,29 @@
 
 .App button:active {
   transform: scale(0.95);
+}
+
+@media screen and (max-width: 1300px) {
+  .App .information {
+    width: calc(100% - 1rem);
+    height: calc(100vh - 2rem);
+  }
+
+  .App button {
+    width: 60vw;
+  }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+  .App .information {
+    width: calc(100% - 4rem);
+    height: calc(100vh);
+    position: relative;
+    top: 1rem;
+    padding-top: 1rem;
+  }
+
+  .App input {
+    margin-bottom: 1rem;
+  }
 }

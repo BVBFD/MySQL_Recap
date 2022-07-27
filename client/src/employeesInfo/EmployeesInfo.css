@@ -52,3 +52,28 @@
 .employeesInfo .wrapper button:active {
   transform: scale(0.95);
 }
+
+@media screen and (max-width: 1300px) {
+  .employeesInfo .wrapper {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .employeesInfo .wrapper {
+    width: 99%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .employeesInfo .wrapper p {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .employeesInfo .wrapper p input {
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+}

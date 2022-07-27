@@ -10,6 +10,7 @@ import Navbar from './navbar/Navbar';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Router>
