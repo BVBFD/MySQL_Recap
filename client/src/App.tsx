@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosRepuest from './config';
@@ -42,6 +42,14 @@ function App() {
       window.alert(error);
     }
   };
+
+  useEffect(() => {
+    const alertSleep = async () => {
+      const res = await axiosRepuest.get('/test');
+      console.log(res.data);
+    };
+    alertSleep();
+  }, []);
 
   return (
     <div className='App'>

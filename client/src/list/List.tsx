@@ -11,17 +11,25 @@ import axiosRepuest from '../config';
 import { DeleteOutline, EditOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { checkNullTaskData } from '../checkNullTaskData';
+import { CircularProgress } from '@mui/material';
 
 const List = () => {
   const [data, setData] = useState<EmployeeType[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsFetching(true);
     const getEmployeesData = async () => {
       const res = await axiosRepuest.get('/join/leftjoin');
       setData(res.data);
+      setIsFetching(false);
     };
 
     getEmployeesData();
+
+    return () => {
+      setIsFetching(false);
+    };
   }, []);
 
   const bodyWidth = document.querySelector('body')?.clientWidth;
@@ -159,15 +167,23 @@ const List = () => {
   };
 
   return (
-    <div className='list'>
-      <DataGrid
-        rows={data}
-        columns={columns}
-        getRowId={(row) => row.id}
-        pageSize={8}
-        // checkboxSelection
-      />
-    </div>
+    <>
+      {!isFetching ? (
+        <div className='list'>
+          <DataGrid
+            rows={data}
+            columns={columns}
+            getRowId={(row) => row.id}
+            pageSize={8}
+            // checkboxSelection
+          />
+        </div>
+      ) : (
+        <div className='progressBox'>
+          <CircularProgress />
+        </div>
+      )}
+    </>
   );
 };
 

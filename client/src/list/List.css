@@ -2,6 +2,13 @@
   height: calc(100vh - 4rem);
 }
 
+.progressBox {
+  height: calc(100vh - 4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .list .edit {
   color: darkblue;
   cursor: pointer;
